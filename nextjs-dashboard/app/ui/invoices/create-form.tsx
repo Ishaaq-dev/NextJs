@@ -15,7 +15,7 @@ import { Button } from '@/app/ui/button';
 export default function Form({ customers }: { customers: CustomerField[] }) {
   const initialState: State = { message: null, errors: {} };
   const [state, formAction] = useFormState(createInvoice, initialState);
- 
+
   return (
     <form action={formAction}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
@@ -48,8 +48,8 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
                   <p className="mt-2 text-sm text-red-500" key={error}>
                     {error}
                   </p>
-              ))}
-          </div>
+                ))}
+            </div>
           </div>
         </div>
 
