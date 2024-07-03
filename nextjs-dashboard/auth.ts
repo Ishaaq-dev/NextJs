@@ -25,12 +25,9 @@ export const { auth, signIn, signOut } = NextAuth({
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials);
-          console.log('saaqy credentials: ', credentials);
-          console.log('saaqy parsedCredentials: ', parsedCredentials);
           if (parsedCredentials.success) {
             const { email, password } = parsedCredentials.data;
             const user = await getUser(email);
-            console.log('Saaqy: ', user);
             if (!user) return null;
 
             const passwordsMatch = await bcrypt.compare(password, user.password);
