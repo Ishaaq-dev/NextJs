@@ -140,7 +140,7 @@ const CustomerFormSchema = z.object({
     }),
 });
 
-export type State = {
+export type CustomerState = {
   errors?: {
       name?: string;
       email?: string;
@@ -151,7 +151,7 @@ export type State = {
 const CreateCustomer = CustomerFormSchema.omit({ id: true });
 const UpdateCustomer = CustomerFormSchema.omit({ id: true });
 
-export async function createCustomer(prevStatee: State, formData: FormData) {
+export async function createCustomer(prevStatee: CustomerState, formData: FormData) {
   const validatedFields = CreateCustomer.safeParse({
       name: formData.get('name'),
       email: formData.get('email'),
