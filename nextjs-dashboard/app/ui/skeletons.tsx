@@ -217,9 +217,10 @@ export function InvoicesTableSkeleton() {
   );
 }
 
-export function CustomersMobileSkeleton() {
+export function CustomersMobileSkeleton(index: { key: number; }) {
   return (
     <div
+      key={index.key}
       className="mb-2 w-full animate-pulse rounded-md bg-white p-4"
     >
       <div className="flex items-center justify-between border-b pb-4">
@@ -250,9 +251,9 @@ export function CustomersMobileSkeleton() {
   )
 }
 
-export function CustomerRowSkeleton() {
+export function CustomerRowSkeleton(index: { key: number; }) {
   return (
-    <tr className="group animate-pulse">
+    <tr key={index.key} className="group animate-pulse">
       <td className="whitespace-nowrap bg-white py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
         <div className="flex items-center gap-3">
           <div className="h-7 w-7 rounded-full bg-gray-300"></div>
@@ -286,7 +287,7 @@ export const CustomersSkeleton = () => {
             <div className="overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0">
               <div className="md:hidden">
                 {rows.map((_, index) => (
-                  <CustomersMobileSkeleton />
+                  <CustomersMobileSkeleton key={index} />
                 ))}
               </div>
               <table className="hidden min-w-full rounded-md text-gray-900 md:table">
@@ -311,7 +312,7 @@ export const CustomersSkeleton = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 text-gray-900">
                   {rows.map((_, index) => (
-                    <CustomerRowSkeleton />
+                    <CustomerRowSkeleton key={index}/>
                   ))}
                 </tbody>
               </table>
