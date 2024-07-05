@@ -5,6 +5,8 @@ import Pagination from '@/app/ui/invoices/pagination';
 import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
 import { CreateCustomer } from '@/app/ui/customers/buttons';
+import { Suspense } from 'react';
+import { CustomersSkeleton } from '@/app/ui/skeletons';
 
 
 export const metadata: Metadata = {
@@ -31,8 +33,9 @@ export default async function Page({
           <Search placeholder="Search customers..." />
           <CreateCustomer />
         </div>
-        
-        <Table  query={query} currentPage={currentPage}/>
+        <Suspense key={query + currentPage} fallback={<CustomersSkeleton />}>
+          <Table  query={query} currentPage={currentPage}/>
+        </Suspense>
         <div className="mt-5 flex w-full justify-center"> 
           <Pagination totalPages={totalPages} />
         </div>
