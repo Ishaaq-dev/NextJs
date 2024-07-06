@@ -142,10 +142,12 @@ const CustomerFormSchema = z.object({
 
 export type CustomerState = {
   errors?: {
+      id?: string,
       name?: string[];
       email?: string[];
       status?: string[];
   };
+  message?: string | null
 }
 
 const CreateCustomer = CustomerFormSchema.omit({ id: true });
@@ -175,6 +177,44 @@ export async function createCustomer(prevState: CustomerState, formData: FormDat
       return {
           message: 'Database Error: Failed to Create Customer.'
       };
+  }
+
+  revalidatePath('/dashboard/customers');
+  redirect('/dashboard/customers');
+}
+
+export async function updateCustomer(id: string, prevState: CustomerState, formData: FormData) {
+  const validatedFields = UpdateCustomer.safeParse({
+    name: formData.get('name'),
+    email: formData.get('email'),
+    image_url: formData.get('image_url'),
+  });
+
+  if (!id) {
+    return {
+      errors: {id},
+      message: 'Missing Id. Failed to Update Customer'
+    }
+  }
+  if (!validatedFields.success) {
+    return {
+        errors: validatedFields.error.flatten().fieldErrors,
+        message: 'Missing Fields. Failed to Update Customer.',
+    };
+  }
+
+  const { name, email, image_url } = validatedFields.data;
+
+  try {
+    await sql`
+      UPDATE customers
+      SET id = ${id}, name = ${name}, email = ${email}, image_url = ${image_url}
+      WHERE id = ${id}
+    `;
+  } catch (error) {
+    return {
+        message: 'Database Error: Failed to Create Customer.'
+    };
   }
 
   revalidatePath('/dashboard/customers');
