@@ -16,19 +16,19 @@ export default async function Page({ params }: { params: { id: string } }) {
     ]);
 
     if (!invoice) {
-    notFound();
+        notFound();
     }
     return (
     <main>
         <Breadcrumbs
-        breadcrumbs={[
-            { label: 'Invoices', href: '/dashboard/invoices' },
-            {
-            label: 'Edit Invoice',
-            href: `/dashboard/invoices/${id}/edit`,
-            active: true,
-            },
-        ]}
+            breadcrumbs={[
+                { label: 'Invoices', href: '/dashboard/invoices' },
+                {
+                    label: 'Edit Invoice',
+                    href: `/dashboard/invoices/${id}/edit`,
+                    active: true,
+                },
+            ]}
         />
         <Form invoice={invoice} customers={customers} />
     </main>
