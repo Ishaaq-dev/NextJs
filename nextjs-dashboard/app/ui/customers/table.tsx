@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { fetchFilteredCustomers } from '@/app/lib/data';
-import { UpdateCustomer } from '@/app/ui/customers/buttons';
+import { DeleteCustomer, UpdateCustomer } from '@/app/ui/customers/buttons';
 
 export default async function CustomersTable({
   query,
@@ -53,6 +53,7 @@ export default async function CustomersTable({
                       </div>
                       <div className='flex justify-end gap-2'>
                         <UpdateCustomer id={customer.id} />
+                        <DeleteCustomer id={customer.id} />
                       </div>
                     </div>
                     <div className="pt-4 text-sm">
@@ -115,6 +116,7 @@ export default async function CustomersTable({
                       <td className="whitespace-nowrap py-3 pl-6 pr-3">
                         <div className="flex justify-end gap-3">
                           <UpdateCustomer id={customer.id} />
+                          <DeleteCustomer id={customer.id} />
                         </div>
                       </td>
                     </tr>
