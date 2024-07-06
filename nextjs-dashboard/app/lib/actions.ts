@@ -142,10 +142,12 @@ const CustomerFormSchema = z.object({
 
 export type CustomerState = {
   errors?: {
+      id?: string,
       name?: string[];
       email?: string[];
       status?: string[];
   };
+  message?: string | null
 }
 
 const CreateCustomer = CustomerFormSchema.omit({ id: true });
@@ -182,7 +184,7 @@ export async function createCustomer(prevState: CustomerState, formData: FormDat
 }
 
 export async function updateCustomer(id: string, prevState: CustomerState, formData: FormData) {
-  const validatedFields = CreateCustomer.safeParse({
+  const validatedFields = UpdateCustomer.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
     image_url: formData.get('image_url'),
@@ -190,7 +192,7 @@ export async function updateCustomer(id: string, prevState: CustomerState, formD
 
   if (!id) {
     return {
-      errors: 'id',
+      errors: {id},
       message: 'Missing Id. Failed to Update Customer'
     }
   }
