@@ -5,7 +5,7 @@ import { lusitana } from '@/app/ui/fonts';
 import { Suspense } from 'react';
 import { LatestInvoicesSkeleton, RevenueChartSkeleton, CardsSkeleton } from '@/app/ui/skeletons';
 import { Metadata } from 'next';
-import { useSession } from "next-auth/react"
+import { useSession } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: 'Overview'
