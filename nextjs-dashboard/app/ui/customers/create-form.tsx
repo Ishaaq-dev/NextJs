@@ -76,7 +76,7 @@ export default function Form() {
                 >
                 Cancel
                 </Link>
-                <Button type="submit">Create Invoice</Button>
+                <Button type="submit">Create Customer</Button>
             </div>
 
         </form>
